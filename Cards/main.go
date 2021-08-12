@@ -2,7 +2,8 @@ package main
 
 func main() {
 	cards := newDeck()
-	cards = append(cards, "Six of Spades")
+	hand, remainingDeck := deal(cards, 5)
 
-	cards.print()
+	hand.print()
+	remainingDeck.print()
 }

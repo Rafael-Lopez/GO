@@ -39,3 +39,12 @@ func newDeck() deck {
 
 	return cards
 }
+
+// Go allows to return multiple values
+func deal(d deck, handSize int) (deck, deck) {
+	// Slices support a “slice” operator with the syntax slice[lowIncludingElement:highUpToButNotIncludingElement]
+	// You can also opt to not specify those values, in which case Go will assume the following:
+	//	a) if low not present: you want to start from the beginning
+	//	b) if high not present: you want to go till the last value
+	return d[:handSize], d[handSize:]
+}
