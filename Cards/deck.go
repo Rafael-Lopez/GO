@@ -17,3 +17,25 @@ func (d deck) print() {
 		fmt.Println(i, card)
 	}
 }
+
+func newDeck() deck {
+	cards := deck{}
+
+	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
+	cardValues := []string{"Ace", "Two", "Three", "Four"}
+
+	// _(underscore) in Golang is known as the Blank Identifier. Golang has a special feature to define and use the unused variable
+	// using Blank Identifier. These variables make the program almost unreadable. Since Golang aims to be concise and readable, it
+	// doesn’t allow you to define an unused variable. If you do so, the compiler will throw an error. The real use of Blank Identifier
+	// comes when a function returns multiple values, but we need only some of them. Basically, it tells the compiler that this
+	// variable is not needed, so it should be ignored without any error. This hides the variable’s values and makes the program
+	// readable. So whenever you will assign a value to Bank Identifier it becomes unusable.
+	// In this case, we are not using the indexes returned by the 'range' keyword, so we just ignore them.
+	for _, suit := range cardSuits {
+		for _, value := range cardValues {
+			cards = append(cards, value+" of "+suit)
+		}
+	}
+
+	return cards
+}
