@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // Create a new type 'deck'
 // whcih is basically a slice of strings
@@ -47,4 +50,9 @@ func deal(d deck, handSize int) (deck, deck) {
 	//	a) if low not present: you want to start from the beginning
 	//	b) if high not present: you want to go till the last value
 	return d[:handSize], d[handSize:]
+}
+
+func (d deck) toString() string {
+	// Type conversion. We can do it because 'deck' is basically a slice of strings (line 7)
+	return strings.Join([]string(d), ",")
 }
