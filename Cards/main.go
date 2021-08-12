@@ -1,13 +1,7 @@
 package main
 
-import "fmt"
-
 func main() {
 	cards := newDeck()
-	// hand, remainingDeck := deal(cards, 5)
-
-	// hand.print()
-	// remainingDeck.print()
-
-	fmt.Println(cards.toString())
+	// When you run this code, a file named "my_cards" will be created in this same folder.
+	cards.saveToFile("my_cards")
 }

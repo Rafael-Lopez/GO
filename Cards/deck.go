@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"strings"
 )
 
@@ -55,4 +56,12 @@ func deal(d deck, handSize int) (deck, deck) {
 func (d deck) toString() string {
 	// Type conversion. We can do it because 'deck' is basically a slice of strings (line 7)
 	return strings.Join([]string(d), ",")
+}
+
+// For now, we are not handling the possible error returned by the IO package. Instead, we are simply going to return it.
+// https://pkg.go.dev/io/ioutil#example-TempFile
+func (d deck) saveToFile(filename string) error {
+	// In case the file doesn't exist, it will be created. The last argument is for file permissions in case the file needs to be created.
+	// For this example, we are passing in 0666 which means everyone can read and write.
+	return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
 }
