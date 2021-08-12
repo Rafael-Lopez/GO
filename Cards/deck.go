@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -64,4 +65,21 @@ func (d deck) saveToFile(filename string) error {
 	// In case the file doesn't exist, it will be created. The last argument is for file permissions in case the file needs to be created.
 	// For this example, we are passing in 0666 which means everyone can read and write.
 	return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
+}
+
+func newDeckFromFile(filename string) deck {
+	bs, err := ioutil.ReadFile(filename)
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+		// Exit causes the current program to exit with the given status code. Conventionally, code zero indicates success, non-zero
+		// an error. The program terminates immediately; deferred functions are not run.
+		// https://pkg.go.dev/os#Exit
+		os.Exit(1)
+	}
+
+	// Split returns a slice of strings
+	s := strings.Split(string(bs), ",")
+
+	return deck(s)
 }
