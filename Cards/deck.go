@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strings"
 )
@@ -82,4 +83,18 @@ func newDeckFromFile(filename string) deck {
 	s := strings.Split(string(bs), ",")
 
 	return deck(s)
+}
+
+func (d deck) shuffle() {
+	for i := range d {
+		// Use len() to get the length of a slice
+		newPosition := rand.Intn(len(d) - 1)
+
+		// Go allows for multiple variable assignments
+		// The assignment proceeds in two phases. First, the operands of index expressions and pointer indirections (including
+		// implicit pointer indirections in selectors) on the left and the expressions on the right are all evaluated in the usual
+		// order. Second, the assignments are carried out in left-to-right order.
+		// https://golang.org/ref/spec#Assignments
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
 }
