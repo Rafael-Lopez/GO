@@ -45,8 +45,15 @@ func main() {
 	}
 
 	// &variable = Give me the memory address of the value this variable is pointing at
-	jimPointer := &jim
-	jimPointer.updateName("Jimmy")
+	// Option a)
+	// jimPointer := &jim
+	// jimPointer.updateName("Jimmy")
+	// jim.print()
+
+	// Option b)
+	// Even though the receiver is expecting a pointer of type person, and jim is just a value (there's a mismatch), this
+	// still works because Go has a shortcut that allowas us to use either a pointer to a type or just the type
+	jim.updateName("Jimmy")
 	jim.print()
 }
 
