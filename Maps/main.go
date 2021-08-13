@@ -16,11 +16,27 @@ func main() {
 	// var colors2 map[string]string
 
 	// c) - equivalent to b)
-	colors := make(map[string]string)
-	colors["white"] = "#ffffff"
+	// colors := make(map[string]string)
+	// colors["white"] = "#ffffff"
 
-	fmt.Println(colors)
+	// fmt.Println(colors)
 
-	delete(colors, "white")
-	fmt.Println(colors)
+	// delete(colors, "white")
+	// fmt.Println(colors)
+
+	colors := map[string]string{
+		"red":   "#ff0000",
+		"green": "#4b5hjt",
+		"white": "#ffffff",
+	}
+
+	printMap(colors)
+}
+
+// Pass a map as a parameter
+func printMap(c map[string]string) {
+	// Iterate over a map
+	for color, hex := range c {
+		fmt.Println("Hex code for", color, "is", hex)
+	}
 }
