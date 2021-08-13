@@ -15,7 +15,17 @@ func main() {
 	//alex := person{"Alex", "Anderson"}
 
 	// b)
-	alex := person{firstName: "Alex", lastName: "Anderson"}
+	//alex := person{firstName: "Alex", lastName: "Anderson"}
+
+	// c)
+	var alex person
+	// At this point, the default values are in place since we haven't initialize the properties
+	fmt.Println(alex)
+	fmt.Printf("%+v", alex)
+	fmt.Println()
+
+	alex.firstName = "Alex"
+	alex.lastName = "Anderson"
 
 	fmt.Println(alex)
 }
