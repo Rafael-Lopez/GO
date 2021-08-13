@@ -10,7 +10,9 @@ type contactInfo struct {
 type person struct {
 	firstName string
 	lastName  string
-	contact   contactInfo
+	//contact   contactInfo
+	// We can also declare the contactInfo property this way. It means there's a property called contactInfo of type contactInfo
+	contactInfo
 }
 
 func main() {
@@ -36,7 +38,7 @@ func main() {
 	jim := person{
 		firstName: "Jim",
 		lastName:  "Party",
-		contact: contactInfo{
+		contactInfo: contactInfo{
 			email:   "jim@gmail.com",
 			zipCode: 94000,
 		},
