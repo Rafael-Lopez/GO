@@ -2,9 +2,15 @@ package main
 
 import "fmt"
 
+type contactInfo struct {
+	email   string
+	zipCode int
+}
+
 type person struct {
 	firstName string
 	lastName  string
+	contact   contactInfo
 }
 
 func main() {
@@ -18,14 +24,23 @@ func main() {
 	//alex := person{firstName: "Alex", lastName: "Anderson"}
 
 	// c)
-	var alex person
+	// var alex person
 	// At this point, the default values are in place since we haven't initialize the properties
-	fmt.Println(alex)
-	fmt.Printf("%+v", alex)
-	fmt.Println()
+	// fmt.Println(alex)
+	// fmt.Printf("%+v", alex)
+	// fmt.Println()
 
-	alex.firstName = "Alex"
-	alex.lastName = "Anderson"
+	// alex.firstName = "Alex"
+	// alex.lastName = "Anderson"
 
-	fmt.Println(alex)
+	jim := person{
+		firstName: "Jim",
+		lastName:  "Party",
+		contact: contactInfo{
+			email:   "jim@gmail.com",
+			zipCode: 94000,
+		},
+	}
+
+	fmt.Printf("%+v", jim)
 }
