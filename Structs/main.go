@@ -44,12 +44,18 @@ func main() {
 		},
 	}
 
-	jim.updateName("Jimmy")
+	// &variable = Give me the memory address of the value this variable is pointing at
+	jimPointer := &jim
+	jimPointer.updateName("Jimmy")
 	jim.print()
 }
 
-func (p person) updateName(newFirstName string) {
-	p.firstName = newFirstName
+// Notice how we changed the receiver type here to be *person
+// This is a type description - it means we are working with a pointer of type person
+func (pointerToPerson *person) updateName(newFirstName string) {
+	// *pointer Give me the value this memory address is pointing at
+	// This is an operator - it means we want to manipulate the value the pointer is referencing
+	(*pointerToPerson).firstName = newFirstName
 }
 
 func (p person) print() {
