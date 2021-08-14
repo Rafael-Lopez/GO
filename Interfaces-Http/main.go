@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 )
@@ -19,8 +20,10 @@ func main() {
 	// - 99999 is the number of empty spaces we want to initially allocate.
 	// - Since the Read function is coded to read data until the Slice is full or no more data to read, and
 	//   it doesn't resize the Slice, that's why we use 99999
-	bs := make([]byte, 99999)
-	resp.Body.Read(bs)
+	// bs := make([]byte, 99999)
+	// resp.Body.Read(bs)
 
-	fmt.Println(string(bs))
+	// fmt.Println(string(bs))
+
+	io.Copy(os.Stdout, resp.Body)
 }
