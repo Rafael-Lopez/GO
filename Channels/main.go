@@ -22,7 +22,10 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	fmt.Println(<-c)
+	for i := 0; i < len(links); i++ {
+		// <- c is blocking code
+		fmt.Println(<-c)
+	}
 }
 
 // When passing a channel as a parameter, you need to specify the type for the channel. In this case, string.
