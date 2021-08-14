@@ -23,9 +23,16 @@ func main() {
 	}
 
 	// Infinite loop
-	for {
+	// for {
+	// 	// <- c is blocking code
+	// 	go checkLink(<-c, c)
+	// }
+
+	// Alternative FOR syntax
+	// Use 'range' with a channel. This is the same as above, but a lot clearer as to what this for is doing.
+	for l := range c {
 		// <- c is blocking code
-		go checkLink(<-c, c)
+		go checkLink(l, c)
 	}
 }
 
