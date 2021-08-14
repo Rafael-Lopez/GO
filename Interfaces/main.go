@@ -2,6 +2,12 @@ package main
 
 import "fmt"
 
+// What this interface statement right here is doing is: if there is any other type inside of our program that
+// has a function called getGreeting() associated with it that returns a string, then that type is also of type bot.
+type bot interface {
+	getGreeting() string
+}
+
 type englishBot struct{}
 type spanishBot struct{}
 
@@ -24,11 +30,6 @@ func (spanishBot) getGreeting() string {
 	return "Hola!"
 }
 
-func printGreeting(eb englishBot) {
-	fmt.Println(eb.getGreeting())
-}
-
-// There's an error, because Go doesn't support method overloading
-func printGreeting(sb spanishBot) {
-	fmt.Println(sb.getGreeting())
+func printGreeting(b bot) {
+	fmt.Println(b.getGreeting())
 }
