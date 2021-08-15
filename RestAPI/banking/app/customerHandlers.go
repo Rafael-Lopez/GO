@@ -3,19 +3,11 @@ package app
 import (
 	"encoding/json"
 	"encoding/xml"
-	"fmt"
 	"net/http"
 
 	"github.com/Rafael-Lopez/GO/RESTAPI/banking/service"
 	"github.com/gorilla/mux"
 )
-
-// Optional: We can use Go struct tags to modify the property names in the JSON response
-type Customer struct {
-	Name    string `json:"full_name" xml:"full_name"`
-	City    string `json:"city" xml:"city"`
-	Zipcode string `json:"zip_code" xml:"zip_code"`
-}
 
 type CustomerHandler struct {
 	service service.CustomerService
@@ -40,10 +32,17 @@ func (ch *CustomerHandler) getCustomer(w http.ResponseWriter, r *http.Request) {
 	customer, err := ch.service.GetCustomer(id)
 
 	if err != nil {
-		w.WriteHeader(err.Code)
-		fmt.Fprintf(w, err.Message)
+		writeResponse(w, err.Code, err.AsMessage())
 	} else {
-		w.Header().Add("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(customer)
+		writeResponse(w, http.StatusOK, customer)
+	}
+}
+
+func writeResponse(w http.ResponseWriter, code int, data interface{}) {
+	// It should always be in this order so that the content type is applied
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(code)
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
 	}
 }
