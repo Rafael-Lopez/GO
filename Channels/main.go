@@ -33,11 +33,13 @@ func main() {
 	// Use 'range' with a channel. This is the same as above, but a lot clearer as to what this for is doing.
 	for l := range c {
 		// Function Literal - In Java this is an anonymous function
-		go func() {
+		// We pass 'l' as an argument to the function literal so that the function literal uses a copy of it,
+		// instead of the one that main it's using at the same time.
+		go func(link string) {
 			time.Sleep(5 * time.Second)
 			// <- c is blocking code
-			checkLink(l, c)
-		}()
+			checkLink(link, c)
+		}(l)
 	}
 }
 
