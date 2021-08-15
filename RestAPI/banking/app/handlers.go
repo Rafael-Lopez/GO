@@ -3,8 +3,9 @@ package app
 import (
 	"encoding/json"
 	"encoding/xml"
-	"fmt"
 	"net/http"
+
+	"github.com/Rafael-Lopez/GO/RESTAPI/banking/service"
 )
 
 // Optional: We can use Go struct tags to modify the property names in the JSON response
@@ -14,17 +15,12 @@ type Customer struct {
 	Zipcode string `json:"zip_code" xml:"zip_code"`
 }
 
-// - ResponseWriter is going to help us send the response to the client
-// - Request is the one coming into the server (request boy, parameters, etc)
-func greet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello World!")
+type CustomerHandler struct {
+	service service.CustomerService
 }
 
-func getAllCustomers(w http.ResponseWriter, r *http.Request) {
-	customers := []Customer{
-		{"Ashish", "New Delhi", "110075"},
-		{"Rob", "New Delhi", "110075"},
-	}
+func (ch *CustomerHandler) getAllCustomers(w http.ResponseWriter, r *http.Request) {
+	customers, _ := ch.service.GetAllCustomers()
 
 	if r.Header.Get("Content-Type") == "application/xml" {
 		w.Header().Add("Content-Type", "application/xml")
